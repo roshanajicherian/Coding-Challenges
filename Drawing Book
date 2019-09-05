@@ -1,0 +1,51 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+long int n=0,p=0,countf=0,countb=0;
+ cin>>n;
+ cin>>p;
+ for(int i=1;i<=p;i++)
+ {
+     if(i%2==0)
+     {
+         countf++;
+     }
+ }
+ for(int i=n;i>=p;i--)
+ {
+     if((i%2==0))
+     {
+         countb++;
+     }
+ }
+if((n%2==0)&&(p%2==0))
+     {
+         countb--;
+     }
+ if((n%2!=0)&&(countf<countb))
+     countf++;
+
+  if(n%2!=0)
+ {
+     countb=countb-1;
+     countf=countf-1;
+ }
+if((n%2!=0)&&(p%2!=0))
+{
+    countb++;
+}
+
+ if(n==p)
+ {
+     countf=0;
+    countb=0;
+ }
+ if(countf>countb)
+    cout<<countb;
+ else
+    cout<<countf;
+    return 0;
+}
