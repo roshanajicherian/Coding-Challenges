@@ -1,0 +1,36 @@
+#include <iostream>
+#include <bits/stdc++.h>
+#include <string>
+using namespace std;
+
+int main()
+{
+    string s;
+    getline(cin, s);
+    string h;
+   int hh;
+    h=s.substr(8,1);
+    hh=stoi(s.substr(0,2));
+    if(h=="P")
+    {
+        if(hh!=12)
+        {
+        hh+=12;
+        cout<<hh<<s.substr(2,6)<< "\n";
+        }
+        else
+        cout<<s.substr(0,8)<<"\n";
+
+    }
+
+   hh=stoi(s.substr(0,2));
+
+   if (h=="A")
+   {
+        if(hh==12)
+        cout << "00"<<s.substr(2,6);
+        else
+        cout<<s.substr(0,8)<<"\n";
+   }
+}
+
