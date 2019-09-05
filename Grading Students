@@ -1,0 +1,34 @@
+#include <iostream>
+using namespace std;
+
+
+int main()
+{
+int res=0,final=0,next=0,mod=0,fres=0,newm=0;
+int grades[100],n=0;
+cin>>n;
+    for(int i=0;i<n;i++)
+    {
+     cin>>grades[i];
+    }
+
+for( int i=0;i<n;i++)
+{
+    if(grades[i]>=38)
+    {
+        mod=grades[i]%5;
+        next=grades[i]-mod;
+        newm=next+5;
+        fres=newm-grades[i];
+        if(fres<3)
+        {
+            grades[i]=newm;
+        }
+
+    }
+
+}
+    for(int i=0;i<n;i++)
+        cout<<grades[i]<<"\n";
+return 0;
+}
