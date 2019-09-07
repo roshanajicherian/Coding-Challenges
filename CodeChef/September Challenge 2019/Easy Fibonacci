@@ -1,0 +1,51 @@
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+int main()
+{
+    int F[1000000],E[1000000],flg=0;
+    unsigned long long int n=1,t=1,k=1,cou=0,fin=0,j=1;
+    scanf("%d",t);
+
+    while(k<=t)
+    {  
+          scanf("%d",n);
+         int coun=n;
+         fin=0;
+         flg=0;
+         F[1]=0;
+         F[2]=1;
+    for(int i=3;i<=n;i++)
+        F[i]=(F[i-2]+F[i-1])%10;
+   while(flg==0)
+   {    cou=0;
+        j=1;
+       for(int i=1;i<=coun;i++)
+   {
+       if(i%2==0)
+            {
+            E[j]=F[i];
+            cou++;
+            j++;
+            }
+   }
+    for(int i=1;i<=cou;i++)
+    {
+
+        F[i]=E[i];
+        if(cou==1)
+            {
+            fin=F[i];
+            flg=1;
+            }
+
+    }
+        coun=cou;
+   }
+   printf("\n",fin);
+   k++;
+    }
+
+    return 0;
+}
