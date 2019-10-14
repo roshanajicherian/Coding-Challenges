@@ -1,0 +1,44 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+void countApplesAndOranges(int s, int t, int a, int b,int m,int n ,long long int apples[50],long long int oranges[50])
+{
+    long int capp=0,corr=0;
+    long long int afin;
+    long int ofin;
+for(int i=0;i<m;i++)
+{
+    afin=apples[i]+a;
+    if((afin>=s) && (afin<=t))
+    capp++;
+}
+for(int i=0;i<m;i++)
+{
+    ofin=oranges[i]+b;
+if((ofin>=s) && (ofin<=t))
+    corr++;
+}
+cout<<capp;
+cout<<"\n"<<corr;
+}
+
+int main()
+{
+    long long int s=0,t=0,a=0,b=0,m=0,n=0;
+    long long int apples[50];
+    long long int oranges[50];
+    cin>>s>>t;
+    cin>>a>>b;
+
+    cin>>m>>n;
+    for(int i=0;i<m;i++)
+    {
+        cin>>apples[i];
+    }
+    for(int i=0;i<n;i++)
+    {
+
+        cin>>oranges[i];
+    }
+    countApplesAndOranges(s,t,a,b,m,n,apples,oranges);
+}
