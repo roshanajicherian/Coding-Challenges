@@ -6,12 +6,13 @@
 using namespace std;
 stack<char> S;
 stack<char> S1;
+stack<char> S2;
 int cou=0,prevcond=0,ncou=0;
 string in;
 string tstring;
 void append()
 {
-    prevcond=1;
+    S2.push(1);
     cin>>in;
     int n=in.size();
     ncou=n;
@@ -23,43 +24,33 @@ void append()
 }
 void dele(int k)
 {
+    S2.push(2);
     prevcond=2;
     char temp;
-    while(cou>k)
+    while(k>0)
     {
          temp=S.top();
         S.pop();
         S1.push(temp);
-        cou--;
+        k--;
     }
 }
 void print(int k)
 {
-    int i=0;
-    while()
-    {
-        tstring+=S.top();
-        S.pop();
-       // i++;
-        cou--;
-    }
 
-    reverse(tstring.begin(),tstring.end());
-    in=tstring;
-    int n=tstring.size();
-    for(int i=0;i<n;i++)
-        S.push(tstring[i]);
-cout<<in;
+cout<<in[k-1]<<'\n';
 }
 void undo()
 {
- if(prevcond==2)
+ if (S2.top()==2)
  {
+     S2.pop();
      S.push(S1.top());
      S1.pop();
  }
- if (prevcond==1)
+ if (S2.top()==1)
  {
+     S2.pop();
      while(ncou>0)
       {
           S.pop();
