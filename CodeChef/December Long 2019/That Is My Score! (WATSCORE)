@@ -1,0 +1,42 @@
+#include <iostream>
+
+using namespace std;
+
+bool checkpos(int loc)
+{
+    if(loc>=9 && loc<=11)
+        return false;
+    else
+        return true;
+}
+int main()
+{
+    int t=0,n=0,sum[12],p=0,s=0,loc=0,val=0,fsum=0;
+    cin>>t;
+    while(t>0)
+    {
+        fsum=0,val=0,loc=0;
+    for(int i=0;i<12;i++)
+        sum[i]=0;
+    cin>>n;
+    for(int i=0;i<n;i++)
+    {
+        cin>>p>>s;
+        loc=p;
+        val=s;
+
+        if(sum[loc]==0 && checkpos(loc))
+        {
+            sum[loc]=val;
+        }
+        if(sum[loc]!=0 && val>sum[loc])
+            sum[loc]=val;
+
+    }
+    for(int i=0;i<12;i++)
+        fsum+=sum[i];
+    cout<<fsum<<'\n';
+    t--;
+    }
+    return 0;
+}
