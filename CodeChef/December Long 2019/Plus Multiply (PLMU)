@@ -1,0 +1,31 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int t=0,n=0,cou=0;
+    cin>>t;
+    while(t>0)
+    {
+        cou=0;
+    cin>>n;
+    int A[n];
+    for(int i=0;i<n;i++)
+    {
+        cin>>A[i];
+    }
+    int sum=0,prod=1;
+    for(int i=0;i<n;i++)
+        for(int j=i+1;j<n;j++)
+    {
+        sum=A[i]+A[j];
+        prod=A[i]*A[j];
+        if(sum==prod && A[i]==A[j])
+            cou++;
+    }
+    cout<<cou<<'\n';
+    t--;
+    }
+    return 0;
+}
