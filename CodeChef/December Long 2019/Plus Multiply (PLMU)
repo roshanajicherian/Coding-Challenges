@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-    int t=0,n=0,cou=0;
+    long long int t=0,n=0,cou=0,x=0,y=0 ;
     cin>>t;
     while(t>0)
     {
@@ -15,13 +15,13 @@ int main()
     {
         cin>>A[i];
     }
-    int sum=0,prod=1;
-    for(int i=0;i<n;i++)
-        for(int j=i+1;j<n;j++)
+
+    for(long long int i=0;i<n;i++)
+        for(long long int j=i+1;j<n;j++)
     {
-        sum=A[i]+A[j];
-        prod=A[i]*A[j];
-        if(sum==prod && A[i]==A[j])
+        x=A[i];
+        y=A[j];
+        if(x==y*(x-1))
             cou++;
     }
     cout<<cou<<'\n';
