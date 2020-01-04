@@ -1,7 +1,15 @@
 #include <iostream>
 
 using namespace std;
-
+int countnot(int A[])
+{ int zer=0;
+    for(int i=0;i<3;i++)
+    {
+        if(A[i]!=0)
+            zer++;
+    }
+    return zer;
+}
 int main()
 {
     int t=0;
@@ -16,12 +24,20 @@ int main()
             cin>>A[i];
             inisum+=A[i];
         }
-    int fsum=0,bsum=0,locf=0,locb=2,nf=0,nb=2,cou=0;
+    int fsum=0,bsum=0,locf=0,locb=2,cou=0;
+    if(s<A[0] || s<A[2])
+        cout<<cou<<'\n';
+        else if (A[0]==A[1] && A[0]==A[2] && A[0]==s)
+            cout<<3<<'\n';
+    else if (inisum<=s)
+        cout<<1<<'\n';
+   else
+    {
     while(inisum!=0)
     {
+
         fsum=0;
-        bsum=0;
-    for(int i=nf;fsum+A[i+1]<=s && i<3;i++)
+    for(int i=0;fsum+A[i]<=s && i<3;i++)
         {
             if(A[i]!=0)
             {
@@ -29,35 +45,24 @@ int main()
             locf=i;
             }
         }
-    for(int i=nb;bsum+A[i-1]<=s && i>0;i--)
-        {
-            if(A[i]!=0)
-            {
-            bsum+=A[i];
-            locb=i;
-            }
-        }
+
         inisum=0;
-    if(fsum>=bsum)
              for(int i=0;i<=locf;i++)
-                {
                 A[i]=0;
-                nf=i;
-                }
-    else
-            for(int i=2;i>=locb;i--)
-            {
-                A[i]=0;
-                locb=i;
-                nb=i;
-            }
+        cou++;
+    if(countnot(A)==1)
+        {
+            cou++;
+            break;
+        }
      for(int i=0;i<3;i++)
        {
            inisum+=A[i];
        }
-        cou++;
+
     }
     cout<<cou<<'\n';
+    }
     }
     return 0;
 }
