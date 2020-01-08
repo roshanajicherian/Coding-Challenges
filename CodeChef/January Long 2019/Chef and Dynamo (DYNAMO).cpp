@@ -10,8 +10,8 @@ int main()
     cin>>t;
     while(t--)
     {
-    long long int n=0,a=0,b=0,c=0,d=0,e=0,cursum=0,sum=0,uplim=1,lwlim=1,lwdis=0,updis=0,temps=0,sum2=0;
-    cin>>n;
+    long long int n=2,a=0,b=0,c=0,d=0,e=0,cursum=0,sum=0,uplim=1,lwlim=1,lwdis=0,updis=0,temps=0,sum2=0;
+    //cin>>n;
     for(int i=0;i<n;i++)
         uplim*=10;
     uplim-=1;
@@ -33,8 +33,16 @@ int main()
     sum2=temps-(a+b);
     if(cursum<=temps)
         c=uplim;
-    else
-        c=abs(uplim-sum2)-1;
+
+    else if(cursum>temps)
+        {
+            c=1;
+            //if((a+b)>(temps/2))
+              //  c=abs(uplim-(a+b));
+            //c=abs(uplim-sum2)-1;
+            //c=(temps/5)*0.66;
+            //e=sum2/3;
+        }
     cout<<c<<'\n';
     fflush(stdout);
     cin>>d;
