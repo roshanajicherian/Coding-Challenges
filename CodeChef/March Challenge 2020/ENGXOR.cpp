@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long int lli;
-lli countsetbits(lli a)
+/*lli countsetbits(lli a)
 {
     lli count = 0;
     while (a)
@@ -10,7 +10,7 @@ lli countsetbits(lli a)
         a >>= 1;
     }
     return count;
-}
+}*/
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -32,7 +32,8 @@ int main()
             for (lli i = 0; i < n; i++)
             {
                 res = qy ^ A[i];
-                if (countsetbits(res) % 2 == 0)
+                if (__builtin_parity(res)==0)
+
                     evn++;
                 else
                     odd++;
