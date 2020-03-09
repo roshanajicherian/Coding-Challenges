@@ -1,11 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long int lli;
-int lookup[256];
-void scanner(int &n)
+void scanner(lli &n)
 {
     bool isneg = false;
-    register int c;
+    register lli c;
     n = 0;
     c = getchar();
     if (c == '-')
@@ -18,43 +17,40 @@ void scanner(int &n)
     if (isneg)
         n *= -1;
 }
-void intial()
+bool parity(lli x)
 {
-    lookup[0] = 0;
-    for (int i = 1; i < 256; i++)
-        lookup[i] = (i & 1) + lookup[i / 2];
-}
-int countbit(int n)
-{
-    return (lookup[n & 0xff] +
-            lookup[(n >> 8) & 0xff] +
-            lookup[(n >> 16) & 0xff] +
-            lookup[n >> 24]);
+    lli y = x ^ (x >> 1);
+    y = y ^ (y >> 2);
+    y = y ^ (y >> 4);
+    y = y ^ (y >> 8);
+    y = y ^ (y >> 16);
+    if (y & 1)
+        return true;
+    return false;
 }
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    int t = 0;
+    lli t = 0;
     scanner(t);
-    intial();
     while (t--)
     {
-        int n = 0, q = 0;
+        lli n = 0, q = 0;
         scanner(n);
         scanner(q);
-        int A[n];
-        int res = 0;
-        for (int i = 0; i < n; i++)
+        lli A[n];
+        lli res = 0;
+        for (lli i = 0; i < n; i++)
             scanner(A[i]);
         while (q--)
         {
-            int qy = 0, evn = 0, odd = 0;
+            lli qy = 0, evn = 0, odd = 0;
             scanner(qy);
-            for (int i = 0; i < n; i++)
+            for (lli i = 0; i < n; i++)
             {
                 res = qy ^ A[i];
-                if (countbit(res) % 2 == 0)
+                if (!parity(res))
                     evn++;
                 else
                     odd++;
