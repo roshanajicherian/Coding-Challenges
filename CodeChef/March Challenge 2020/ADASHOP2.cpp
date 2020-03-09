@@ -9,36 +9,102 @@ int main()
         int r0 = 0, c0 = 0;
         cin >> r0 >> c0;
         bool board[9][9];
-        for (int i = 0; i <= 8; i++)
-            for (int j = 0; j <= 8; j++)
-                board[i][j] = false;
-        int i = 1, j = 1, k = 0;
+        int i = r0, j = c0, k = 0;
         int mov = 0, ipos[64], jpos[64];
-        int cou = 0;
-        while (i <= 8 && j <= 8 && board[i][j] == false)
+        if (r0 != 1 || c0 != 1)
+        {
+            int movupi = r0;
+            int movupj = c0;
+            if (r0 != c0)
+            {
+                if (r0 > c0)
+                {
+                    while (movupi != movupj)
+                    {
+                        movupi--;
+                        movupj++;
+                    }
+                }
+                else
+                {
+                    while (movupi != movupj)
+                    {
+                        movupi++;
+                        movupj--;
+                    }
+                }
+            }
+            int digi = movupj;
+            int digj = movupj;
+            while (movupi >= 1 && movupj >= 1)
+            {
+                bool flgtr = false;
+                bool flgbl = false;
+                mov++;
+                ipos[k] = movupi; //change here and next line
+                jpos[k] = movupj;
+                k++;
+                int upi = movupi;
+                int upj = movupj;
+                while (upi > 1 && upj < 8)
+                {
+                    upi--;
+                    upj++;
+                    flgtr = true;
+                }
+                if (flgtr)
+                {
+                    mov++;
+                    ipos[k] = upi;
+                    jpos[k] = upj;
+                    k++;
+                }
+                upi = movupi;
+                upj = movupj;
+                while (upi < 8 && upj > 1)
+                {
+                    upi++;
+                    upj--;
+                    flgbl = true;
+                }
+                if (flgbl)
+                {
+                    mov += 2;
+                    ipos[k] = upi;
+                    jpos[k] = upj;
+                    k++;
+                    ipos[k] = movupi;
+                    jpos[k] = movupj;
+                    k++;
+                }
+                movupi--;
+                movupj--;
+            }
+            i = digi+1 ;
+            j = digj+1;
+        }
+
+        while (i <= 8 && j <= 8)
         {
             bool flgtr = false;
             bool flgbl = false;
             mov++;
-            cou++;
             ipos[k] = i;
             jpos[k] = j;
             k++;
-            board[i][j] = true;
             int curi = i;
             int curj = j;
             //move along top-right dag
-            while (curi > 1 && curj < 8 && board[curi - 1][curj + 1] == false)
+            while (curi > 1 && curj < 8)
             {
                 curi--;
                 curj++;
-                board[curi][curj] = true;
                 flgtr = true;
             }
             if (flgtr)
             {
                 mov++;
-                cou++;
+
                 ipos[k] = curi;
                 jpos[k] = curj;
                 k++;
@@ -46,22 +112,21 @@ int main()
             curi = i;
             curj = j;
             //move along bottom-left dag
-            while (curi < 8 && curj > 1 && board[curi + 1][curj - 1] == false)
+            while (curi < 8 && curj > 1)
             {
                 curi++;
                 curj--;
-                board[curi][curj] = true;
                 flgbl = true;
             }
             if (flgbl)
             {
                 mov += 2;
-                cou++;
+
                 ipos[k] = curi;
                 jpos[k] = curj;
                 k++;
-                ipos[k]=i;
-                jpos[k]=j;
+                ipos[k] = i;
+                jpos[k] = j;
                 k++;
             }
             //move along major dag
