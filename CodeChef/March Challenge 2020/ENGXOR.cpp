@@ -1,6 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long int lli;
+#define P2(n) n, n ^ 1, n ^ 1, n
+#define P4(n) P2(n), P2(n ^ 1), P2(n ^ 1), P2(n)
+#define P6(n) P4(n), P4(n ^ 1), P4(n ^ 1), P4(n)
+#define LOOK_UP P6(0), P6(1), P6(1), P6(0)
 void scanner(lli &n)
 {
     bool isneg = false;
@@ -17,16 +21,16 @@ void scanner(lli &n)
     if (isneg)
         n *= -1;
 }
-bool parity(lli x)
+unsigned int table[256] = {LOOK_UP};
+lli parity(lli x)
 {
-    lli y = x ^ (x >> 1);
-    y = y ^ (y >> 2);
-    y = y ^ (y >> 4);
-    y = y ^ (y >> 8);
-    y = y ^ (y >> 16);
-    if (y & 1)
-        return true;
-    return false;
+    int max = 16;
+    while (max >= 8)
+    {
+        x = x ^ (x >> max);
+        max >>= 1;
+    }
+    return table[x & 0xff];
 }
 int main()
 {
@@ -37,22 +41,34 @@ int main()
     while (t--)
     {
         lli n = 0, q = 0;
+        bool res[n];
         scanner(n);
         scanner(q);
         lli A[n];
-        lli res = 0;
+        for (int i = 0; i < n; i++)
+            res[i] = false;
         for (lli i = 0; i < n; i++)
+        {
             scanner(A[i]);
+            if (!parity(A[i]))
+                res[i] = true;
+        }
         while (q--)
         {
             lli qy = 0, evn = 0, odd = 0;
+            bool qypar = false;
             scanner(qy);
+            if (!parity(qy))
+                qypar = true;
             for (lli i = 0; i < n; i++)
             {
-                res = qy ^ A[i];
-                if (!parity(res))
+                if ((res[i] == true) && (qypar == true))
                     evn++;
-                else
+                else if ((res[i] == false) && (qypar == false))
+                    evn++;
+                else if ((res[i] == true) && (qypar == false))
+                    odd++;
+                else if ((res[i] == false) && (qypar == true))
                     odd++;
             }
             cout << evn << ' ' << odd << '\n';
